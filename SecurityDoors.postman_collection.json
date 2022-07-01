@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "4a47283b-ac51-42de-b81e-e1e53b9aa1a3",
+		"name": "SecurityDoors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login and register cases",
+			"item": [
+				{
+					"name": "Login user successful",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\" , function(){\r",
+									"    pm.expect(user).to.have.property('firstName');\r",
+									"    pm.expect(user).to.have.property('lastName');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('inOffice');\r",
+									"    pm.expect(user).to.have.property('inTunnel');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Global token has been set\", function(){\r",
+									"    var token = pm.globals.get('token');\r",
+									"    pm.expect(token).to.eql(user.token);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin_admin\",\r\n    \"password\": \"Pa$$word00!\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/login",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user bad password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\" , function(){\r",
+									"    pm.expect(user).to.have.property('firstName');\r",
+									"    pm.expect(user).to.have.property('lastName');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('inOffice');\r",
+									"    pm.expect(user).to.have.property('inTunnel');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Global token has been set\", function(){\r",
+									"    var token = pm.globals.get('token');\r",
+									"    pm.expect(token).to.eql(user.token);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin_admin\",\r\n    \"password\": \"badpassword\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/login",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user bad username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\" , function(){\r",
+									"    pm.expect(user).to.have.property('firstName');\r",
+									"    pm.expect(user).to.have.property('lastName');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('inOffice');\r",
+									"    pm.expect(user).to.have.property('inTunnel');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Global token has been set\", function(){\r",
+									"    var token = pm.globals.get('token');\r",
+									"    pm.expect(token).to.eql(user.token);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin11\",\r\n    \"password\": \"Pa$$word00!\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/login",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user successfull",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"test4\",\r\n  \"firstName\": \"test\",\r\n  \"lastName\": \"test\",\r\n  \"role\": \"Employee\",\r\n  \"password\": \"Pa$$word00!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/register",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user validation error",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"test4\",\r\n  \"firstName\": \"test\",\r\n  \"lastName\": \"test\",\r\n  \"password\": \"Pa$$word00!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/register",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user duplicate username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"test4\",\r\n  \"firstName\": \"test\",\r\n  \"lastName\": \"test\",\r\n  \"role\": \"Employee\",\r\n  \"password\": \"Pa$$word00!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/register",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user weak password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"LetMeIn\",\r\n  \"firstName\": \"let\",\r\n  \"lastName\": \"me in\",\r\n  \"role\": \"Empleyee\",\r\n  \"password\": \"letmein\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7121/api/account/register",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\" , function(){\r",
+									"    pm.expect(user).to.have.property('firstName');\r",
+									"    pm.expect(user).to.have.property('lastName');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('inOffice');\r",
+									"    pm.expect(user).to.have.property('inTunnel');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', \"\");\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7121/api/account/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"account",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "GetTags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7121/api/tag",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluX2FkbWluIiwidW5pcXVlX25hbWUiOiJBZG1pbiIsImZhbWlseV9uYW1lIjoiQWRtaW4iLCJJbk9mZmljZSI6IkZhbHNlIiwicm9sZSI6IkFkbWluIiwiVGFnIjoiMTU4NzgxODEtOTMxMS00NWIwLWJlZjAtNmNjNjU0YTUwZTIyLTM1ZTJkMjA3LWNiNWUtNDVmNC04YjFlLTRiN2EzZGUyMzMxMiIsIlRhZ1R1bm5lbFN0YXR1cyI6IkFjdGl2ZSIsIklzQXV0aG9yaXplZFRhZ1R1bm5lbCI6IlRydWUiLCJUYWdUdW5uZWxFeHBpcmF0aW9uIjoiMjkvMDYvMjAyNSAyMDoxNTo0MSIsIlRhZ09mZmljZVN0YXR1cyI6IkFjdGl2ZSIsIklzQXV0aG9yaXplZFRhZ09mZmljZSI6IlRydWUiLCJUYWdPZmZpY2VFeHBpcmF0aW9uIjoiMjkvMDYvMjAyNSAyMDoxNTo0MSIsIm5iZiI6MTY1NjY2ODc2MywiZXhwIjoxNjU3MjczNTYzLCJpYXQiOjE2NTY2Njg3NjN9.s8a8DVuGsOfnDEfSYXNt1vedRyclHZN1XIH_oPL-ip43B6jHRrxYfNhlrx9EC3YiLaUrLNFDFHx-ZbNrgCwe-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tagStatusInTunnel\": 1,\r\n  \"authorizeInTunnel\": true,\r\n  \"tagStatusInOffice\": 0,\r\n  \"authorizeInOffice\": false,\r\n  \"username\": \"Test1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7121/api/tag",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"tag"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Office",
+			"item": [
+				{
+					"name": "Enter office",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7121/api/office/enter",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"office",
+								"enter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leave office",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7121/api/office/leave",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"office",
+								"leave"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCurrentUserInfo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7121/api/office/leave",
+							"host": [
+								"localhost"
+							],
+							"port": "7121",
+							"path": [
+								"api",
+								"office",
+								"leave"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:7121"
+		}
+	]
+}
