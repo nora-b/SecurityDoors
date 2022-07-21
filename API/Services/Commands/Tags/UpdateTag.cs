@@ -45,13 +45,18 @@ namespace API.Services.Commands.Tags
                 userTag.IsAuthorizedOffice = request.Tag.AuthorizeInOffice;
 
                 //the case for the tunnel
+                bool statusTunnelChanged = false;
+                bool statusOfficeChanged = false;
+
                 if (request.Tag.AuthorizeInTunnel is true && TagStatus.Pending == userTag.StatusTunnel)
                 {
+                    statusTunnelChanged = true;
                     userTag.StatusTunnel = TagStatus.Active;
                 }
                 //the case for the office
                 if (request.Tag.AuthorizeInOffice is true && TagStatus.Pending == userTag.StatusOffice)
                 {
+                    statusOfficeChanged = true;
                     userTag.StatusOffice = TagStatus.Active;
                     //If admin gives authorization to enter the office, by default he/she should have access also to enter the tunnel
                     userTag.StatusTunnel = TagStatus.Active;
@@ -59,22 +64,26 @@ namespace API.Services.Commands.Tags
 
                 if (userTag.TagTunnelExpiresAt <= DateTimeOffset.UtcNow)
                 {
+                    statusTunnelChanged = true;
                     userTag.StatusTunnel = TagStatus.Expired;
                     //if the tag tunnel expires by default also the office tag will be expired
                     userTag.StatusOffice = TagStatus.Expired;
                 }
                 else
                 {
+                    if(!statusTunnelChanged)
                     userTag.StatusTunnel = request.Tag.TagStatusInTunnel ?? userTag.StatusTunnel;
                 }
 
                 //the case for the office
                 if (userTag.TagOfficeExpiresAt <= DateTimeOffset.UtcNow)
                 {
+                    statusOfficeChanged = true;
                     userTag.StatusOffice = TagStatus.Expired;
                 }
                 else
                 {
+                    if(!statusOfficeChanged)
                     userTag.StatusOffice = request.Tag.TagStatusInOffice ?? userTag.StatusOffice;
                 }
 

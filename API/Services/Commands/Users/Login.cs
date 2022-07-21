@@ -53,6 +53,15 @@ namespace API.Services.Commands.Users
                     _mapper.Map(getTag, tag);
                 }
 
+                //update the userHistory table 
+                var userHistory = await _context.UserHistories.FirstOrDefaultAsync(x => x.UserId == user.Id);
+                if (userHistory != null){
+                    userHistory.LastLoggedInOffice = DateTime.Now;
+                    _context.UserHistories.Update(userHistory);
+                    await _context.SaveChangesAsync();
+
+                }
+                
                 if (result.Succeeded)
                 {
                     var response = new UserDto

@@ -12,6 +12,6 @@ namespace API.DTOs
         public DateTimeOffset TagTunnelExpiresAt { get; set; }
         public DateTimeOffset TagOfficeExpiresAt { get; set; }
         public Guid UserId { get; set; }
-
+        public string Username { get; set;}
     }
 }

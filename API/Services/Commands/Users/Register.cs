@@ -64,6 +64,14 @@ namespace API.Services.Commands.Users
                 await _context.Tags.AddAsync(newTag);
 
                 string token = _tokenService.CreateToken(user, request.User.Role, tag);
+
+                //adding the user history
+                var userHistory = new UserHistory {
+                    UserId = user.Id,
+                    LastLoggedInOffice = null
+                };
+                
+                _context.UserHistories.Add(userHistory);
                 
                 var result = await _context.SaveChangesAsync() > 0;
 

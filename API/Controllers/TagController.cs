@@ -14,10 +14,10 @@ namespace API.Controllers
         {
         }
         [Authorize(Policy = "IsAdmin")]
-        [HttpGet]
-        public async Task<IActionResult> GetTags()
+        [HttpPost]
+        public async Task<IActionResult> GetTags(TagFilterParams filter)
         {
-            return HandleResult(await Mediator.Send(new RetrieveAllTags.Query()));
+            return HandleResult(await Mediator.Send(new RetrieveAllTags.Query{filter = filter}));
         }
         [Authorize(Policy ="IsAdmin")]
         [HttpPut]
